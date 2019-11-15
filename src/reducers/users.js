@@ -9,6 +9,7 @@ export default function users(state = {}, action) {
         ...action.users,
       };
     case SAVE_QUESTION_ANSWER:
+      debugger
       return {
         ...state, // spread question slice of state
         [action.authUser]: { // modify specified user from key
@@ -16,7 +17,7 @@ export default function users(state = {}, action) {
           answers: {
             // modify the specified option
             ...state[action.authUser].answers, //{action.qid: action.option}// spread the answers
-            [action.qid]: [action.option]//answers: state[action.authUser].answers.concat({action.qid: action.option}),
+            [action.qid]: action.answer//answers: state[action.authUser].answers.concat({action.qid: action.option}),
           },
         },
       };
