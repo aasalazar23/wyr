@@ -169,7 +169,7 @@ li {
   color: #C3392A;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .question {
     grid-template-areas:
       "userInfo option1"

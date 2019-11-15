@@ -7,7 +7,7 @@ class Votes extends Component {
       <div>
         <ul className="voters">
           {this.props.voterAvatars.map(voter => (
-            <li key={voter.url}>
+            <li key={voter.id}>
               <img
                 src={voter.url}
                 alt={`avatar of ${voter.name}`}
@@ -26,6 +26,7 @@ function mapStateToProps({ users, authUser }, { questionId, option, votes }) {
   const voterAvatars = votes.map(vote => ({
     url: users[vote].avatarURL,
     name: users[vote].name,
+    id: questionId + users[vote].name,
   }));
   return {
     authUser,
