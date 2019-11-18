@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { formatQuestion, formatDate } from "../utils/helpers";
+import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
 
