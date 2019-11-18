@@ -30,8 +30,8 @@ class Question extends Component {
 
     return (
       <div className="question">
-        <div className="question-info">
-          <div className="questionAvatar">
+        <div className="item-info">
+          <div className="itemAvatar">
             <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
           </div>
           <div className="info">
