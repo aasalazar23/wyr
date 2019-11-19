@@ -9,7 +9,6 @@ export default function users(state = {}, action) {
         ...action.users,
       };
     case SAVE_QUESTION_ANSWER:
-      debugger
       return {
         ...state, // spread question slice of state
         [action.authUser]: { // modify specified user from key

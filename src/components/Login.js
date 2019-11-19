@@ -35,7 +35,7 @@ class Login extends Component {
           <select autoFocus name="userLogin" onChange={this.handleChange}>
             <option value="default">Select user</option>
             {users.map((user) => (
-              <option value={user.id}>{user.name}</option>
+              <option key={user.id} value={user.id}>{user.name}</option>
             ))}
           </select>
           <button className="btn" type="submit" disabled={id === "default"}>Submit</button>
