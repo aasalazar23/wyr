@@ -75,6 +75,17 @@ li {
   margin: 10px;
 }
 
+.login {
+  display:grid;
+}
+.loginForm {
+  display: grid;
+}
+.loginForm select {
+  margin: 1em;
+  padding: 1em;
+  font-size: 1em;
+}
 .voters {
   display:grid;
   grid-template-columns: repeat(auto-fill, 25px);

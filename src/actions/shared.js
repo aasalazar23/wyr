@@ -1,9 +1,7 @@
 import { fetchInitialData, saveQuestionAnswer } from "../utils/api";
 import { receiveUsers } from "./users";
 import { receiveQuestions } from "./questions";
-import { setAuthUser } from "./authUser";
 
-const tmpAuthUser = "aSalazar";
 
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
 
@@ -12,7 +10,6 @@ export function handleInitialData() {
     return fetchInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthUser(tmpAuthUser));
     });
   };
 }
