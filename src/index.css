@@ -46,7 +46,9 @@ a {
 .active {
   font-weight: bold;
 }
-
+.nav {
+  display: grid;
+}
 .nav ul {
   display: flex;
   flex-direction: row;
