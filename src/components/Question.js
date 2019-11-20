@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom"
 import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
@@ -25,11 +26,11 @@ class Question extends Component {
       return <p>This question does not exist</p>;
     }
 
-    const { id, author, timestamp, optionOne, optionTwo } = question;
+    const { id, timestamp, optionOne, optionTwo } = question;
     const { avatarURL, name } = user;
 
     return (
-      <div className="question">
+      <Link to={`/question/${id}`} className="question">
         <div className="item-info">
           <div className="itemAvatar">
             <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
@@ -55,7 +56,7 @@ class Question extends Component {
           <span>{optionTwo.text}</span>
           <Votes votes={optionTwo.votes} />
         </button>
-      </div>
+      </Link>
     );
   }
 }
@@ -70,4 +71,4 @@ function mapStateToProps({ questions, users, authUser }, { questionId }) {
     user: user ? user : null,
   };
 }
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));
