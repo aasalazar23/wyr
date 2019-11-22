@@ -177,9 +177,8 @@ li {
 
 .option {
   display: grid;
-  border: 3px;
+  border: inset;
   padding: 10px;
-  background-color: #969696;
 }
 .option1 {
   grid-area: option1;

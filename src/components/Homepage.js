@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Tabs from "../components/Tabs";
 import Question from "./Question";
-import { debuggerStatement } from "@babel/types";
 
 class HomePage extends Component {
   render() {
@@ -21,11 +20,11 @@ class HomePage extends Component {
           </div>
           <div label="New Questions">
             <ul>
-              {/* {this.props.unansweredQuestionsIds.map(id => (
+              {this.props.unansweredQuestionsIds.map(id => (
                 <li key={id}>
                   <Question questionId={id} />
                 </li>
-              ))} */}
+              ))}
             </ul>
           </div>
         </Tabs>
@@ -36,9 +35,9 @@ class HomePage extends Component {
 
 function mapStateToProps({ questions, authUser }) {
   const sortQuestions = questions => {
-    debugger
     return questions.sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
+      (a, b) => {
+        return b.timestamp - a.timestamp}
     );
   };
   const aggregatedQuestionVotes = question => [
@@ -51,16 +50,16 @@ function mapStateToProps({ questions, authUser }) {
   const filteredAnswers = questionList.filter(question =>
     aggregatedQuestionVotes(question).includes(authUser)
   );
-  // const filteredUnanswered = questionList.filter(
-  //   question => !aggregatedQuestionVotes(question).includes(authUser)
-  // );
+  const filteredUnanswered = questionList.filter(
+    question => !aggregatedQuestionVotes(question).includes(authUser)
+  );
 
   const answeredQuestions = sortQuestions(filteredAnswers);
-  // const unansweredQuestions = sortQuestions(filteredUnanswered);
+  const unansweredQuestions = sortQuestions(filteredUnanswered);
 
   return {
     answeredQuestionsIds: answeredQuestions.map(q => q.id),
-    // unansweredQuestionsIds: unansweredQuestions(q => q.id),
+    unansweredQuestionsIds: unansweredQuestions.map(q => q.id),
   };
 }
 
