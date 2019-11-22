@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom"
-import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
 
@@ -21,40 +20,25 @@ class Question extends Component {
   render() {
     const { question, user, answered } = this.props;
 
-    // if user routes to non existent question ID
-    if (question === null) {
-      return <p>This question does not exist</p>;
-    }
-
     const { id, timestamp, optionOne, optionTwo } = question;
-    const { avatarURL, name } = user;
 
     return (
       <Link to={`/question/${id}`} className="question">
-        <div className="item-info">
-          <div className="itemAvatar">
-            <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
-          </div>
-          <div className="info">
-            <span>
-              <strong>{name}</strong>
-            </span>
-            <div>{formatDate(timestamp)}</div>
-          </div>
-        </div>
         <button
           className="option option1"
           onClick={e => this.handleVote(e, "optionOne")}
+          disabled={answered}
         >
           <span>{optionOne.text}</span>
-          <Votes votes={optionOne.votes} />
+          {answered ? <Votes votes={optionOne.votes} /> : null}
         </button>
         <button
           className="option option2"
           onClick={e => this.handleVote(e, "optionTwo")}
+          disabled={answered}
         >
           <span>{optionTwo.text}</span>
-          <Votes votes={optionTwo.votes} />
+          {answered ? <Votes votes={optionTwo.votes} /> : null}
         </button>
       </Link>
     );

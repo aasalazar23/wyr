@@ -4,36 +4,42 @@ import Tabs from "../components/Tabs";
 import Question from "./Question";
 
 class HomePage extends Component {
+
+
   render() {
+
+    const { user, unansweredQuestionsIds, answeredQuestionsIds } = this.props;
+
     return (
       <div>
-        <h3 className="center">Questions</h3>
+        <h3 className="center">Welcome {user}!</h3>
         <Tabs>
-          <div label="Answered">
-            <ul>
-              {this.props.answeredQuestionsIds.map(id => (
-                <li key={id}>
-                  <Question questionId={id} />
-                </li>
-              ))}
-            </ul>
-          </div>
           <div label="New Questions">
             <ul>
-              {this.props.unansweredQuestionsIds.map(id => (
+              {unansweredQuestionsIds.map(id => (
                 <li key={id}>
-                  <Question questionId={id} />
+                  <Question questionId={id} answered={false}/>
                 </li>
               ))}
             </ul>
           </div>
+          <div label="Answered">
+            <ul>
+              {answeredQuestionsIds.map(id => (
+                <li key={id}>
+                  <Question questionId={id} answered={true}/>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </Tabs>
       </div>
     );
   }
 }
 
-function mapStateToProps({ questions, authUser }) {
+function mapStateToProps({ questions, users, authUser }) {
   const sortQuestions = questions => {
     return questions.sort(
       (a, b) => {
