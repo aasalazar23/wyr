@@ -19,7 +19,7 @@ class Question extends Component {
     );
   };
   render() {
-    const { question, user } = this.props;
+    const { question, user, answered } = this.props;
 
     // if user routes to non existent question ID
     if (question === null) {

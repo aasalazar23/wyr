@@ -60,6 +60,7 @@ function mapStateToProps({ questions, authUser }) {
   return {
     answeredQuestionsIds: answeredQuestions.map(q => q.id),
     unansweredQuestionsIds: unansweredQuestions.map(q => q.id),
+    user: users[authUser].name
   };
 }
 
