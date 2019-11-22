@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
@@ -23,7 +23,7 @@ class QuestionPage extends Component {
 
     // if user routes to non existent question ID
     if (question === null) {
-      return <p>This question does not exist</p>;
+      return <Redirect to='/notfound'></Redirect>;
     }
 
     const { id, timestamp, optionOne, optionTwo } = question;
@@ -66,13 +66,13 @@ class QuestionPage extends Component {
 function mapStateToProps({ questions, users, authUser }, props) {
   //TODO: check if authUser has voted, if so, disable button, render votes
   const { id } = props.match.params // passed by router
-  const question = questions[id];
-  debugger
-  const user = users[question.author];
+  const question = questions[id] ? questions[id] : null;
+  const user = question ? users[question.author] : null;
+
   return {
     authUser,
-    question: question ? question : null,
-    user: user ? user : null,
+    question,
+    user,
   };
 }
 export default withRouter(connect(mapStateToProps)(QuestionPage));
