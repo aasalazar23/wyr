@@ -19,46 +19,59 @@ class QuestionPage extends Component {
     );
   };
   render() {
-    const { question, user, answered } = this.props;
+    const { question, user } = this.props;
 
     // if user routes to non existent question ID
     if (question === null) {
       return <Redirect to='/notfound'></Redirect>;
     }
 
+    const aggregatedQuestionVotes = question => [
+      ...question.optionOne.votes,
+      ...question.optionTwo.votes,
+    ];
+    const answered = aggregatedQuestionVotes(question).includes(user)
+      ? true
+      : false;
+
+
     const { id, timestamp, optionOne, optionTwo } = question;
     const { avatarURL, name } = user;
 
     return (
-      <div to={`/question/${id}`} className="question">
-        <div className="item-info">
-          <div className="itemAvatar">
-            <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
+      <div>
+        <h3>Would you Rather...</h3>
+        <div to={`/question/${id}`} className="question">
+          <div className="item-info">
+            <div className="itemAvatar">
+              <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
+            </div>
+            <div className="info">
+              <span>
+                <strong>{name}</strong>
+              </span>
+              <div>{formatDate(timestamp)}</div>
+            </div>
           </div>
-          <div className="info">
-            <span>
-              <strong>{name}</strong>
-            </span>
-            <div>{formatDate(timestamp)}</div>
-          </div>
+          <button
+            className="option option1"
+            onClick={e => this.handleVote(e, "optionOne")}
+            disabled={answered}
+          >
+            <span>{optionOne.text}</span>
+            {answered ? <Votes votes={optionOne.votes} /> : null}
+          </button>
+          <button
+            className="option option2"
+            onClick={e => this.handleVote(e, "optionTwo")}
+            disabled={answered}
+          >
+            <span>{optionTwo.text}</span>
+            {answered ? <Votes votes={optionTwo.votes} /> : null}
+          </button>
         </div>
-        <button
-          className="option option1"
-          onClick={e => this.handleVote(e, "optionOne")}
-          disabled={answered}
-        >
-          <span>{optionOne.text}</span>
-          {answered ? <Votes votes={optionOne.votes} /> : null}
-        </button>
-        <button
-          className="option option2"
-          onClick={e => this.handleVote(e, "optionTwo")}
-          disabled={answered}
-        >
-          <span>{optionTwo.text}</span>
-          {answered ? <Votes votes={optionTwo.votes} /> : null}
-        </button>
       </div>
+
     );
   }
 }
@@ -69,10 +82,12 @@ function mapStateToProps({ questions, users, authUser }, props) {
   const question = questions[id] ? questions[id] : null;
   const user = question ? users[question.author] : null;
 
+
   return {
     authUser,
     question,
     user,
+
   };
 }
 export default withRouter(connect(mapStateToProps)(QuestionPage));
