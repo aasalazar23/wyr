@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
+import Question from "../components/Question"
 import Votes from "./Votes";
 
 class QuestionPage extends Component {
@@ -19,23 +20,21 @@ class QuestionPage extends Component {
     );
   };
   render() {
-    const { question, user } = this.props;
+    const { question, user, authUser } = this.props;
 
     // if user routes to non existent question ID
     if (question === null) {
       return <Redirect to='/notfound'></Redirect>;
     }
 
-    const aggregatedQuestionVotes = question => [
+    const aggregatedQuestionVotes = [
       ...question.optionOne.votes,
       ...question.optionTwo.votes,
     ];
-    const answered = aggregatedQuestionVotes(question).includes(user)
-      ? true
-      : false;
+    const answered = aggregatedQuestionVotes.includes(authUser);
 
 
-    const { id, timestamp, optionOne, optionTwo } = question;
+    const { id, timestamp} = question;
     const { avatarURL, name } = user;
 
     return (
@@ -53,24 +52,7 @@ class QuestionPage extends Component {
               <div>{formatDate(timestamp)}</div>
             </div>
           </div>
-          <div className="question">
-            <button
-              className="option option1"
-              onClick={e => this.handleVote(e, "optionOne")}
-              disabled={answered}
-            >
-              <span>{optionOne.text}</span>
-              {answered ? <Votes votes={optionOne.votes} /> : null}
-            </button>
-            <button
-              className="option option2"
-              onClick={e => this.handleVote(e, "optionTwo")}
-              disabled={answered}
-            >
-              <span>{optionTwo.text}</span>
-              {answered ? <Votes votes={optionTwo.votes} /> : null}
-            </button>
-          </div>
+          <Question questionId={id} answered={answered}/>
 
         </div>
       </div>

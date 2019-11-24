@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom"
+import { Link, withRouter, Redirect } from "react-router-dom"
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
 
@@ -16,6 +16,8 @@ class Question extends Component {
         answer: option,
       })
     );
+
+    this.props.history.push(`/question/${question.id}`)
   };
   render() {
     const { question, answered } = this.props;
@@ -55,6 +57,13 @@ class Question extends Component {
 function mapStateToProps({ questions, users, authUser }, { questionId }) {
   //TODO: check if authUser has voted, if so, disable button, render votes
   const question = questions[questionId];
+
+  // const aggregatedQuestionVotes = [
+  //   ...question.optionOne.votes,
+  //   ...question.optionTwo.votes,
+  // ];
+  // const answered = aggregatedQuestionVotes.includes(authUser)
+  // debugger
   return {
     authUser,
     question: question ? question : null,
