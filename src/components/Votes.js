@@ -15,6 +15,7 @@ class Votes extends Component {
               />
             </li>
           ))}
+          <li>{this.props.perc * 100}%</li>
         </ul>
       </div>
     );
@@ -22,7 +23,7 @@ class Votes extends Component {
 }
 
 // might need to get this info off of store, want to pull off votes directly from the store so it doesn't get mixed up
-function mapStateToProps({ users, authUser }, { questionId, option, votes }) {
+function mapStateToProps({ users, authUser }, { questionId, votes, perc }) {
   const voterAvatars = votes.map(vote => ({
     url: users[vote].avatarURL,
     name: users[vote].name,
@@ -30,6 +31,7 @@ function mapStateToProps({ users, authUser }, { questionId, option, votes }) {
   }));
   return {
     authUser,
+    perc,
     voterAvatars: voterAvatars,
   };
 }

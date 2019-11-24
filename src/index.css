@@ -48,6 +48,7 @@ a {
 }
 .nav {
   display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 .nav ul {
   display: flex;
@@ -147,15 +148,28 @@ li {
   max-width: 590px;
   padding: 10px;
   display: grid;
+  grid-area: question;
   grid-template-areas:
-    "userInfo"
     "option1"
     "option2";
   grid-row-gap: 1em;
   margin: 0 auto;
   border: 1px solid #dad7d7;
   border-radius: 3px;
-  cursor: pointer;
+}
+
+.question-details {
+  width: 100%;
+  max-width: 590px;
+  padding: 10px;
+  display: grid;
+  grid-template-areas:
+    "userInfo"
+    "question";
+  grid-row-gap: 1em;
+  margin: 0 auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
 }
 
 .item-info {
@@ -179,6 +193,7 @@ li {
   display: grid;
   border: inset;
   padding: 10px;
+  cursor: pointer;
 }
 .option1 {
   grid-area: option1;
@@ -221,10 +236,9 @@ li {
 }
 
 @media (min-width: 600px) {
-  .question {
+  .question-details {
     grid-template-areas:
-      "userInfo option1"
-      "userInfo option2";
+      "userInfo question";
     grid-template-columns: 1fr 2fr;
     grid-row-gap: 1em;
   }

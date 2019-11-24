@@ -41,7 +41,7 @@ class QuestionPage extends Component {
     return (
       <div>
         <h3>Would you Rather...</h3>
-        <div to={`/question/${id}`} className="question">
+        <div to={`/question/${id}`} className="question-details">
           <div className="item-info">
             <div className="itemAvatar">
               <img src={avatarURL} alt={`avatar of ${name}`} className="avatar" />
@@ -53,22 +53,25 @@ class QuestionPage extends Component {
               <div>{formatDate(timestamp)}</div>
             </div>
           </div>
-          <button
-            className="option option1"
-            onClick={e => this.handleVote(e, "optionOne")}
-            disabled={answered}
-          >
-            <span>{optionOne.text}</span>
-            {answered ? <Votes votes={optionOne.votes} /> : null}
-          </button>
-          <button
-            className="option option2"
-            onClick={e => this.handleVote(e, "optionTwo")}
-            disabled={answered}
-          >
-            <span>{optionTwo.text}</span>
-            {answered ? <Votes votes={optionTwo.votes} /> : null}
-          </button>
+          <div className="question">
+            <button
+              className="option option1"
+              onClick={e => this.handleVote(e, "optionOne")}
+              disabled={answered}
+            >
+              <span>{optionOne.text}</span>
+              {answered ? <Votes votes={optionOne.votes} /> : null}
+            </button>
+            <button
+              className="option option2"
+              onClick={e => this.handleVote(e, "optionTwo")}
+              disabled={answered}
+            >
+              <span>{optionTwo.text}</span>
+              {answered ? <Votes votes={optionTwo.votes} /> : null}
+            </button>
+          </div>
+
         </div>
       </div>
 
