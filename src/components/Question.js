@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, withRouter, Redirect } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom";
 import { handleSaveAnswer } from "../actions/shared";
 import Votes from "./Votes";
 
@@ -17,19 +17,19 @@ class Question extends Component {
       })
     );
 
-    this.props.history.push(`/question/${question.id}`)
+    this.props.history.push(`/question/${question.id}`);
   };
   render() {
     const { question, answered } = this.props;
 
     const { id, optionOne, optionTwo } = question;
 
-  const optionOneVotes = optionOne.votes.length;
-  const optionTwoVotes = optionTwo.votes.length;
-  const voteTotal = optionOneVotes + optionTwoVotes;
+    const optionOneVotes = optionOne.votes.length;
+    const optionTwoVotes = optionTwo.votes.length;
+    const voteTotal = optionOneVotes + optionTwoVotes;
 
-  const optionOnePerc = optionOneVotes/voteTotal || 0;
-  const optionTwoPerc = optionTwoVotes/voteTotal || 0;
+    const optionOnePerc = optionOneVotes / voteTotal || 0;
+    const optionTwoPerc = optionTwoVotes / voteTotal || 0;
 
     return (
       <Link to={`/question/${id}`} className="question">
@@ -39,7 +39,9 @@ class Question extends Component {
           disabled={answered}
         >
           <span>{optionOne.text}</span>
-          {answered ? <Votes votes={optionOne.votes} perc={optionOnePerc}/> : null}
+          {answered ? (
+            <Votes votes={optionOne.votes} perc={optionOnePerc} />
+          ) : null}
         </button>
         <button
           className="option option2"
@@ -47,7 +49,9 @@ class Question extends Component {
           disabled={answered}
         >
           <span>{optionTwo.text}</span>
-          {answered ? <Votes votes={optionTwo.votes} perc={optionTwoPerc}/> : null}
+          {answered ? (
+            <Votes votes={optionTwo.votes} perc={optionTwoPerc} />
+          ) : null}
         </button>
       </Link>
     );
