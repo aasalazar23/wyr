@@ -32,7 +32,7 @@ class Login extends Component {
       <div className="login center">
         <h2 className="center">Login</h2>
         <form className="loginForm" onSubmit={this.handleSubmit}>
-          <select autoFocus name="userLogin" onChange={this.handleChange}>
+          <select autoFocus className="custom-select" name="userLogin" onChange={this.handleChange}>
             <option value="default">Select user</option>
             {users.map((user) => (
               <option key={user.id} value={user.id}>{user.name}</option>
