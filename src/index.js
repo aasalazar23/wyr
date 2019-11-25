@@ -6,6 +6,8 @@ import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
+import ErrorBoundary from "react-error-boundary";
+import ErrorPage from "./components/ErrorPage";
 import * as serviceWorker from "./serviceWorker";
 
 // allows for redux dev tools
@@ -17,14 +19,13 @@ const composeEnhancers =
     })) ||
   compose;
 
-const store = createStore(
-  reducer,
-  composeEnhancers(middleware)
-);
+const store = createStore(reducer, composeEnhancers(middleware));
 console.log(store);
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <App />
+    </ErrorBoundary>
   </Provider>,
   document.getElementById("root")
 );
