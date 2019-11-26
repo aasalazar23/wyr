@@ -5,38 +5,31 @@ import { handleAddQuestion } from "../actions/shared"
 
 class NewQuestion extends Component {
   state = {
-    optionOneText: "",
-    optionTwoText: "",
+    optionOne: "",
+    optionTwo: "",
   };
 
-  handleChangeOne = e => {
-    const optionOneText = e.target.value;
+  handleChange = e => {
+    const optionText = e.target.value;
+    const option = e.target.name;
 
     this.setState(() => ({
-      optionOneText,
-    }));
-  };
-
-  handleChangeTwo = e => {
-    const optionTwoText = e.target.value;
-
-    this.setState(() => ({
-      optionTwoText,
+      [option]: optionText,
     }));
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const { optionOneText, optionTwoText } = this.state; // extracts text from state
+    const { optionOne, optionTwo } = this.state; // extracts text from state
     const { dispatch } = this.props;
 
-    dispatch(handleAddQuestion(optionOneText, optionTwoText));
+    dispatch(handleAddQuestion(optionOne, optionTwo));
 
     this.setState(() => ({
       // reset text box to empty string
-      optionOneText: "",
-      optionTwoText: "",
+      optionOne: "",
+      optionTwo: "",
     }));
 
     this.props.history.push('/')
@@ -52,14 +45,16 @@ class NewQuestion extends Component {
           <textarea
             placeholder="Would you rather... A:"
             value={optionOneText}
-            onChange={this.handleChangeOne}
+            name="optionOne"
+            onChange={this.handleChange}
             className="textarea"
             maxLength={280}
           />
           <textarea
             placeholder="Would you rather... B:"
             value={optionTwoText}
-            onChange={this.handleChangeTwo}
+            name="optionTwo"
+            onChange={this.handleChange}
             className="textarea"
             maxLength={280}
           />
