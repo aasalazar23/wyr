@@ -11,11 +11,13 @@ Lastly, a user always has the option to logout. Upon doing so (or if they never 
 
 Demonstrates competence in React and Redux. Users, Questions, and an "Auth User" are managed by the redux store. Components demonstrate code reusibility and interactivity.
 
-## Available Scripts
+## Install & Start
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm install`
+
+### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
