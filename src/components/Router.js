@@ -22,7 +22,7 @@ export const Router = () => (
     <PrivateRoute path="/" exact component={HomePage} />
     <Route path="/login" component={Login} />
     <PrivateRoute path="/add" component={NewQuestion} />
-    <Route path="/question/:id" component={QuestionPage} />
+    <PrivateRoute path="/question/:id" component={QuestionPage} />
     <PrivateRoute path="/leaderboard" component={Leaderboard} />
     <Route path="*" component={NotFound} />
   </Switch>
