@@ -54,7 +54,6 @@ function mapStateToProps({ users }) {
       userList.push({id: users[user].id, name: users[user].name})
     }
   }
-  console.log(userList)
   return {
     users: userList
   };

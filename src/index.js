@@ -20,7 +20,7 @@ const composeEnhancers =
   compose;
 
 const store = createStore(reducer, composeEnhancers(middleware));
-console.log(store);
+
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary FallbackComponent={ErrorPage}>

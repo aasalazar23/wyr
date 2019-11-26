@@ -7,15 +7,13 @@ import Votes from "./Votes";
 class Question extends Component {
   handleVote = (e, option) => {
     e.preventDefault();
-    const { dispatch, question, authUser } = this.props;
+    const { handleSaveAnswer, question, authUser } = this.props;
 
-    dispatch(
-      handleSaveAnswer({
-        authUser,
-        qid: question.id,
-        answer: option,
-      })
-    );
+    handleSaveAnswer({
+      authUser,
+      qid: question.id,
+      answer: option,
+    });
 
     this.props.history.push(`/question/${question.id}`);
   };
@@ -59,18 +57,18 @@ class Question extends Component {
 }
 
 function mapStateToProps({ questions, users, authUser }, { questionId }) {
-  //TODO: check if authUser has voted, if so, disable button, render votes
   const question = questions[questionId];
 
-  // const aggregatedQuestionVotes = [
-  //   ...question.optionOne.votes,
-  //   ...question.optionTwo.votes,
-  // ];
-  // const answered = aggregatedQuestionVotes.includes(authUser)
-  // debugger
   return {
     authUser,
     question: question ? question : null,
   };
 }
-export default withRouter(connect(mapStateToProps)(Question));
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSaveAnswer: info => dispatch(handleSaveAnswer(info)),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Question));
