@@ -48,12 +48,13 @@ class Login extends Component {
 
 function mapStateToProps({ users }) {
   // for basic data protection, hides access to users full data. returns array of ids and names only
-  const userList = [];
-  if (users !== {}) {
-    for (const user in users) {
-      userList.push({id: users[user].id, name: users[user].name})
-    }
-  }
+  // const userList = [];
+  // if (users !== {}) {
+  //   for (const user in users) {
+  //     userList.push({id: users[user].id, name: users[user].name})
+  //   }
+  // }
+  const userList = Object.values(users).map(({ id, name}) => ({ id, name })); // per udacity review, this is awesome!
   return {
     users: userList
   };
