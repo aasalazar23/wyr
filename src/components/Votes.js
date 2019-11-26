@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-class Votes extends Component {
-  render() {
-    const {voterAvatars, perc} = this.props;
+const Votes = (props) => {
+    const {voterAvatars, perc} = props;
     return (
       <div className="votes">
         <ul className="voters">
@@ -25,7 +24,6 @@ class Votes extends Component {
         <p className="vPerc">{perc * 100}%</p>
       </div>
     );
-  }
 }
 
 // might need to get this info off of store, want to pull off votes directly from the store so it doesn't get mixed up
