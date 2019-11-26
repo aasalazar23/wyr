@@ -1,12 +1,11 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { useSelector } from "react-redux";
 import Login from "../components/Login";
 import HomePage from "../components/Homepage";
 import NewQuestion from "../components/NewQuestion";
 import Leaderboard from "../components/Leaderboard";
 import QuestionPage from "../components/QuestionPage";
-import ErrorPage from "../components/ErrorPage";
 import NotFound from "../components/NotFound";
 
 

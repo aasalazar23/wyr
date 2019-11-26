@@ -4,7 +4,6 @@ import { Redirect, withRouter } from "react-router-dom";
 import { formatDate } from "../utils/helpers";
 import { handleSaveAnswer } from "../actions/shared";
 import Question from "../components/Question"
-import Votes from "./Votes";
 
 class QuestionPage extends Component {
   handleVote = (e, option) => {
