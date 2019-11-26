@@ -38,7 +38,7 @@ class Question extends Component {
           onClick={e => this.handleVote(e, "optionOne")}
           disabled={answered}
         >
-          <span>{optionOne.text}</span>
+          <h3>{optionOne.text}</h3>
           {answered ? (
             <Votes votes={optionOne.votes} perc={optionOnePerc} />
           ) : null}
@@ -48,7 +48,7 @@ class Question extends Component {
           onClick={e => this.handleVote(e, "optionTwo")}
           disabled={answered}
         >
-          <span>{optionTwo.text}</span>
+          <h3>{optionTwo.text}</h3>
           {answered ? (
             <Votes votes={optionTwo.votes} perc={optionTwoPerc} />
           ) : null}

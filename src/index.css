@@ -63,13 +63,13 @@ a {
 }
 .nav {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 .nav ul {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content: flex-start;
+  grid-template-columns: repeat(3, 1fr);
   text-decoration: none;
+  margin: 0;
 }
 
 ul {
@@ -113,7 +113,7 @@ li {
 }
 
 .logout {
-  margin: 1em;
+  margin: 0;
   padding: 10px;
 }
 
@@ -133,28 +133,6 @@ li {
   background-color: var(--accent-color);
   border: solid var(--accent-color);
   border-width: 5px 5px 0 5px;
-}
-
-.voters {
-  display:grid;
-  grid-template-columns: repeat(auto-fill, 50px);
-  animation: resize 2000ms ease 2 alternate;
-}
-
-@keyframes resize {
-  to{
-    grid-template-columns: repeat(auto-fill, 25px);
-  }
-}
-.voters li {
-  padding: 0;
-}
-
-.voterAvatar {
-  height: 3em;
-  width: 3em;
-  border-radius: 3em;
-  margin: 0;
 }
 
 .user {
@@ -180,9 +158,7 @@ li {
 }
 
 .question {
-  max-width: 590px;
-  min-width: 250px;
-  padding: 1rem;
+  width: 100%;
   display: grid;
   grid-area: question;
   grid-template-areas:
@@ -205,6 +181,7 @@ li {
   margin: 0 auto;
   border: 5px solid var(--accent-color);
   border-radius: 3px;
+  align-items: center;
 }
 
 .question-details .question{
@@ -213,6 +190,7 @@ li {
 
 .item-info {
   margin: 10px;
+  max-height: 200px;
   grid-area: userInfo;
   display: grid;
   grid-template-areas:
@@ -231,7 +209,7 @@ li {
 .option {
   display: grid;
   border: none;
-  padding: 2rem;
+  padding: 1rem;
   cursor: pointer;
   background-color: var(--accent-color);
   font-size: 1em;
@@ -248,6 +226,40 @@ li {
   grid-area: option2;
 }
 
+.votes {
+  display: grid;
+  grid-template-areas:
+    "voters voters"
+    "vCount vPerc";
+}
+.voters {
+  display:grid;
+  grid-area: voters;
+  grid-template-columns: repeat(auto-fill, 50px);
+  animation: resize 2000ms ease 2 alternate;
+}
+
+@keyframes resize {
+  to{
+    grid-template-columns: repeat(auto-fill, 25px);
+  }
+}
+.voters li {
+  padding: 0;
+}
+
+.voterAvatar {
+  height: 3em;
+  width: 3em;
+  border-radius: 3em;
+  margin: 0;
+}
+.vCount {
+  grid-area: vCount;
+}
+.vPerc {
+  grid-area: vPerc;
+}
 .new-question {
   width: 100%;
   max-width: 590px;
@@ -272,6 +284,10 @@ li {
 }
 
 @media (min-width: 600px) {
+  .nav {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+  }
   .question-details {
     grid-template-areas:
       "userInfo question";

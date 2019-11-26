@@ -38,7 +38,7 @@ class QuestionPage extends Component {
 
     return (
       <div>
-        <h3>Would you Rather...</h3>
+        <h1>Would you Rather...</h1>
         <div to={`/question/${id}`} className="question-details">
           <div className="item-info">
             <div className="itemAvatar">

@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 
 class Votes extends Component {
   render() {
+    const {voterAvatars, perc} = this.props;
     return (
-      <div>
+      <div className="votes">
         <ul className="voters">
-          {this.props.voterAvatars.map(voter => (
+          {voterAvatars.map(voter => (
             <li key={voter.id}>
               <img
                 src={voter.url}
@@ -15,8 +16,13 @@ class Votes extends Component {
               />
             </li>
           ))}
-          <li>{this.props.perc * 100}%</li>
         </ul>
+        <p className="vCount">
+          {voterAvatars.length}
+          {voterAvatars.length === 1 ? " person has" : " people have"} voted for
+          this option
+        </p>
+        <p className="vPerc">{perc * 100}%</p>
       </div>
     );
   }
